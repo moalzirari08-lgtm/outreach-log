@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outreach overzicht</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --surface: #ffffff;
+      --ink: #211f1c;
+      --ink-soft: #6b6863;
+      --border: #e4e0d7;
+      --red: #c43e2f;
+      --red-bg: #fbeae7;
+      --amber: #b5790e;
+      --amber-bg: #fbf1dd;
+      --green: #3f7d3c;
+      --green-bg: #eaf3e8;
+      --gray: #8a8781;
+      --gray-bg: #f0eee8;
+      --blue: #2f6690;
+      --blue-bg: #e8f0f5;
+      --teal: #1d8073;
+      --teal-bg: #e4f3f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .rec-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rec-dot { animation: none; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .sub {
+      margin: 4px 0 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    .sub .forget-link {
+      background: none;
+      border: none;
+      color: var(--ink-soft);
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 8px;
+      font-family: inherit;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 26px;
+      display: block;
+    }
+    .stat-label {
+      color: var(--ink-soft);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .scroll-x { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 560px;
+    }
+    th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--ink-soft);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    .handle { font-weight: 500; }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-sent { background: var(--amber-bg); color: var(--amber); }
+    .status-sent .dot { background: var(--amber); }
+    .status-replied { background: var(--blue-bg); color: var(--blue); }
+    .status-replied .dot { background: var(--blue); }
+    .status-warm { background: var(--teal-bg); color: var(--teal); }
+    .status-warm .dot { background: var(--teal); }
+    .status-client { background: var(--green-bg); color: var(--green); }
+    .status-client .dot { background: var(--green); }
+    .status-none { background: var(--gray-bg); color: var(--gray); }
+    .status-none .dot { background: var(--gray); }
+    .note { color: var(--ink-soft); }
+    .state-msg {
+      padding: 60px 24px;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    .gate {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 360px;
+    }
+    .gate-label {
+      display: block;
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+    .pw-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--ink);
+      background: var(--bg);
+      margin-bottom: 14px;
+    }
+    .pw-input:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 1px;
+      border-color: var(--blue);
+    }
+    .pw-button {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      margin-bottom: 14px;
+    }
+    .pw-button:hover { opacity: 0.9; }
+    .pw-button:disabled { opacity: 0.6; cursor: default; }
+    .remember-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      cursor: pointer;
+    }
+    .gate-error {
+      color: var(--red);
+      font-size: 13px;
+      margin: 12px 0 0;
+      min-height: 16px;
+    }
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: 1fr; }
+      .wrap { padding: 28px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="rec-dot" aria-hidden="true"></div>
+      <div>
+        <h1 id="client-name">Outreach overzicht</h1>
+        <p class="sub" id="last-updated">Beveiligd overzicht — wachtwoord vereist</p>
+      </div>
+    </header>
+
+    <div class="gate" id="gate">
+      <label class="gate-label" for="pw-input">Wachtwoord</label>
+      <input type="password" id="pw-input" class="pw-input" placeholder="••••••••" autocomplete="current-password" />
+      <button id="pw-submit" class="pw-button">Bekijk overzicht</button>
+      <label class="remember-row">
+        <input type="checkbox" id="remember-check" checked />
+        Onthoud op dit apparaat
+      </label>
+      <p class="gate-error" id="gate-error"></p>
+    </div>
+
+    <div id="results" style="display:none">
+      <div class="stats" id="stats" style="display:none">
+        <div class="stat-card">
+          <span class="stat-num" id="stat-total">0</span>
+          <span class="stat-label">Totaal benaderd</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-replied">0</span>
+          <span class="stat-label">Positieve reacties</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-waiting">0</span>
+          <span class="stat-label">Wachtend</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="scroll-x">
+          <div id="content" class="state-msg">Overzicht laden…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === Instellen ===
+    // Webhook van scenario "Klant toegang - outreach overzicht" (id 6432959), actief in Make.
+    // Er staat geen wachtwoord in dit bestand — dat kent alleen het Make-scenario.
+    const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/2mjsx5bdp0xjsxsk18nkqw1kgf44d4q3';
+    const CLIENT_LABEL = 'Outreach overzicht';
+    const STORAGE_KEY = 'outreach_overzicht_pw';
+
+    document.getElementById('client-name').textContent = CLIENT_LABEL;
+
+    const gateEl = document.getElementById('gate');
+    const pwInput = document.getElementById('pw-input');
+    const pwSubmit = document.getElementById('pw-submit');
+    const rememberCheck = document.getElementById('remember-check');
+    const gateError = document.getElementById('gate-error');
+    const resultsEl = document.getElementById('results');
+    const contentEl = document.getElementById('content');
+    const updatedEl = document.getElementById('last-updated');
+    const statsEl = document.getElementById('stats');
+
+    function statusInfo(raw) {
+      const s = (raw || '').toLowerCase().trim();
+      if (s === 'klant') return { cls: 'status-client', label: 'Klant geworden' };
+      if (s === 'warm') return { cls: 'status-warm', label: 'Warm' };
+      if (s === 'gereageerd') return { cls: 'status-replied', label: 'Gereageerd' };
+      if (s === 'geen interesse') return { cls: 'status-none', label: 'Geen interesse' };
+      if (s === 'verzonden') return { cls: 'status-sent', label: 'Verzonden' };
+      return { cls: 'status-sent', label: raw || 'Onbekend' };
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    function render(records) {
+      if (!Array.isArray(records) || records.length === 0) {
+        contentEl.className = 'state-msg';
+        contentEl.textContent = 'Nog geen outreach-pogingen geregistreerd.';
+        return;
+      }
+
+      statsEl.style.display = 'grid';
+      let positive = 0;
+      let waiting = 0;
+
+      const rows = records.map((r) => {
+        const handle = r.naam || '—';
+        const status = statusInfo(r.status);
+        const date = r.laatste_activiteit || r.datum_verzonden || '—';
+        const note = r.notities || r.laatste_bericht || '';
+
+        if (['status-replied', 'status-warm', 'status-client'].includes(status.cls)) positive++;
+        if (status.cls === 'status-sent') waiting++;
+
+        return `<tr>
+          <td class="handle">${escapeHtml(handle)}</td>
+          <td><span class="status-pill ${status.cls}"><span class="dot"></span>${escapeHtml(status.label)}</span></td>
+          <td>${escapeHtml(date)}</td>
+          <td class="note">${escapeHtml(note)}</td>
+        </tr>`;
+      }).join('');
+
+      document.getElementById('stat-total').textContent = records.length;
+      document.getElementById('stat-replied').textContent = positive;
+      document.getElementById('stat-waiting').textContent = waiting;
+
+      contentEl.outerHTML = `<table>
+        <thead><tr>
+          <th>Instagram</th><th>Status</th><th>Laatste activiteit</th><th>Notitie</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+    }
+
+    function addForgetLink() {
+      if (document.getElementById('forget-link')) return;
+      const link = document.createElement('button');
+      link.id = 'forget-link';
+      link.className = 'forget-link';
+      link.textContent = 'Ander wachtwoord';
+      link.onclick = () => {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      };
+      updatedEl.appendChild(link);
+    }
+
+    function attempt(password, fromStorage) {
+      gateError.textContent = '';
+      pwSubmit.disabled = true;
+      pwSubmit.textContent = 'Bezig…';
+
+      // Gewone fetch, standaard mode 'cors' — GEEN no-cors.
+      fetch(`${MAKE_WEBHOOK_URL}?password=${encodeURIComponent(password)}`)
+        .then((res) => {
+          if (res.status === 401) throw new Error('WRONG_PASSWORD');
+          if (!res.ok) throw new Error('Overzicht kon niet worden opgehaald.');
+          return res.json();
+        })
+        .then((data) => {
+          if (rememberCheck.checked) {
+            localStorage.setItem(STORAGE_KEY, password);
+          } else {
+            localStorage.removeItem(STORAGE_KEY);
+          }
+          gateEl.style.display = 'none';
+          resultsEl.style.display = '';
+          render(data);
+          updatedEl.textContent = 'Laatst bijgewerkt: ' + new Date().toLocaleString('nl-NL') + ' ';
+          addForgetLink();
+        })
+        .catch((err) => {
+          pwSubmit.disabled = false;
+          pwSubmit.textContent = 'Bekijk overzicht';
+          if (fromStorage) {
+            localStorage.removeItem(STORAGE_KEY);
+            return;
+          }
+          gateError.textContent = err.message === 'WRONG_PASSWORD'
+            ? 'Onjuist wachtwoord. Probeer opnieuw.'
+            : (err.message || 'Er ging iets mis bij het laden.');
+        });
+    }
+
+    pwSubmit.addEventListener('click', () => {
+      const pw = pwInput.value.trim();
+      if (!pw) return;
+      attempt(pw, false);
+    });
+    pwInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') pwSubmit.click();
+    });
+
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      attempt(stored, true);
+    }
+  </script>
+</body>
+</html>
